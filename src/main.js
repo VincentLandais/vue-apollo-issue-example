@@ -5,6 +5,7 @@ import { ApolloClient, createHttpLink, InMemoryCache, ApolloLink, concat } from 
 import { DefaultApolloClient } from '@vue/apollo-composable'
 
 import { createAuth0, useAuth0 } from '@auth0/auth0-vue';
+import { exposeAuth0 } from './plugin';
 
 const authMiddleware = new ApolloLink(async (operation, forward) => {
     // THIS FUNCTION IS EXECUTED BEFORE EACH APOLLO REQUEST, THIS IS WHERE YOU CAN ADD THE AUTH0 ACCESS TOKEN
@@ -39,4 +40,5 @@ createApp({
 
     render: () => h(App),
 }).use(createAuth0())
+    .use(exposeAuth0())
     .mount('#app')
