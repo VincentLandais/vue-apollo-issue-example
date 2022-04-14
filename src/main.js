@@ -5,12 +5,13 @@ import { ApolloClient, createHttpLink, InMemoryCache, ApolloLink, concat } from 
 import { DefaultApolloClient } from '@vue/apollo-composable'
 
 import { createAuth0, useAuth0 } from '@auth0/auth0-vue';
-import { exposeAuth0 } from './plugin';
+import { exposeAuth0, client } from './plugin';
 
 const authMiddleware = new ApolloLink(async (operation, forward) => {
-    // THIS FUNCTION IS EXECUTED BEFORE EACH APOLLO REQUEST, THIS IS WHERE YOU CAN ADD THE AUTH0 ACCESS TOKEN
+    console.log(await client.value.isAuthenticated)
 
-    const { getAccessTokenSilently, isAuthenticated } = useAuth0(); // RETURNS UNDEFINED WHEN EXECUTING MUTATIONS
+    // THIS FUNCTION IS EXECUTED BEFORE EACH APOLLO REQUEST, THIS IS WHERE YOU CAN ADD THE AUTH0 ACCESS TOKEN
+    // const { getAccessTokenSilently, isAuthenticated } = client.value.useAuth0(); // RETURNS UNDEFINED WHEN EXECUTING MUTATIONS
 
     /* IN A REAL SITUTATION ADD BEARER TOKEN TO REQUEST HEADERS...
     if (isAuthenticated.value) {
