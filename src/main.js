@@ -8,7 +8,7 @@ import { createAuth0, useAuth0 } from '@auth0/auth0-vue';
 import { exposeAuth0, client } from './plugin';
 
 const authMiddleware = new ApolloLink(async (operation, forward) => {
-    console.log(await client.value.isAuthenticated)
+    console.log(client.value.isAuthenticated)
 
     // THIS FUNCTION IS EXECUTED BEFORE EACH APOLLO REQUEST, THIS IS WHERE YOU CAN ADD THE AUTH0 ACCESS TOKEN
     // const { getAccessTokenSilently, isAuthenticated } = client.value.useAuth0(); // RETURNS UNDEFINED WHEN EXECUTING MUTATIONS
